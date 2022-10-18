@@ -343,6 +343,48 @@
       display: inline-block;
       width: 20px;
     }
+
+    #modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 100;
+    }
+
+    #modalBg {
+      background: hsla(0, 0%, 0%, 0.25);
+      width: 100vw;
+      height: 100vh;
+      position: absolute;
+      z-index: 101;
+      cursor: pointer;
+    }
+
+    .modalBoxContainer {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+    }
+    .modalBox {
+      background: #fff;
+      border: 1px solid;
+      z-index: 102;
+      margin: 2em;
+      padding: 1em;
+      box-shadow: 2px 5px 8px #000;
+      max-width: 700px;
+    }
+
+    .x-container {
+      display: flex;
+      justify-content: right;
+    }
+    #x {
+      cursor: pointer;
+    }
   </style>
 
   <link rel="stylesheet" href="marquee.css">
@@ -457,6 +499,24 @@
 
     </ul>
   </footer>
+
+
+  <div id="modal" style="display: none;">
+    <div class="modalBoxContainer">
+      <div class="modalBox">
+        <div class="x-container"><div id="x">X</div></div>
+        <div style="padding: 1em;">
+          <h1>Thank You!</h1>
+          <h2>For funding the Radical Pro-Abortion Agenda!</h2>
+          <div style="margin: 2em 0; display: flex; justify-content: center; align-items: center;">
+            <a href="#" target="_blank"><span><strong>View your RPAA token</strong></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="modalBg"></div>
+
+  </div>
 </body>
 
 <script src="./min.ethers.js"></script>
@@ -483,7 +543,7 @@
   const donationButtons = [$donation1, $donation2, $donation5, $donation10, $donation25, $donation50, $donation100]
 
 
-  const env = 'goerli'
+  const env = 'local'
 
 
   const MINTER_CONTRACT = {
@@ -633,6 +693,7 @@
             Success!
           `)
           $walletConnected.style.display = 'initial'
+          document.getElementById('modal').style.display = 'initial'
         }
       }, 1000)
 
@@ -650,6 +711,16 @@
   $mintToken.onclick = mint
 
 })()
+
+
+
+  document.getElementById('modalBg').onclick = () => {
+    document.getElementById('modal').style.display = 'none'
+  }
+
+  document.getElementById('x').onclick = () => {
+    document.getElementById('modal').style.display = 'none'
+  }
 
 </script>
 </html>
